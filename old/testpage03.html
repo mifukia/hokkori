@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+  <html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <title>テストページ003</title>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+      <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    </head>
+    <body>
+
+      <a-scene>
+        <a-assets>
+          <img id="last" crossorigin="anonymous" src="hdri_image/Chelsea_Stairs_8k_3.jpg">
+          <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
+          <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
+        </a-assets>
+
+        <a-sky id="image-360" radius="10" src="#last"></a-sky>
+
+        <a-plane id="box01" position="-9.234 -0.143 -1.620" rotation="0 90 0" scale="2 2 2" color="#FFFFFF"  material="opacity:0" ></a-plane><!--はずれ-->
+        <a-plane id="box02" position="-7.36 -6.01 0.556" rotation="-39.175 92.424 -1.618" scale="1.5 1.5 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+        <a-plane id="box03" position="-7.165 -5.330 3.447" rotation="-31.402 124.258 -3.405" scale="2 2 1"  color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+        <a-plane id="box04" position="2.475 0.634 9.424" rotation="0 -176.659 0" scale="1.5 1.5 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+        <a-plane id="box05" position="6.204 -1.471 -7.508" rotation="-11.646 -35.215 -0.926" scale="1.5 1.5 1"  color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+        <a-plane id="box06" position="7.933 -2.735 4.964" rotation="-3.7236 -104.820 -0.420" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+
+        <a-camera>
+          <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+        </a-entity>
+      </a-camera>
+    </a-scene>
+
+    <script>
+    var box01 = document.getElementById('box01');
+    var box02 = document.getElementById('box02');
+    var box03 = document.getElementById('box03');
+    var box04 = document.getElementById('box04');
+    var box05 = document.getElementById('box05');
+    var box06 = document.getElementById('box06');
+
+     box01.addEventListener('click', function () {
+     box01.setAttribute('material','opacity:1');
+     box01.setAttribute('src','#miss');
+     console.log("box01 hit");
+     });
+      box02.addEventListener('click', function () {
+      box02.setAttribute('material','opacity:1');
+      box02.setAttribute('src','#miss');
+      console.log("box02 hit");
+      });
+
+      box03.addEventListener('click', function () {
+      box03.setAttribute('material','opacity:1');
+      box03.setAttribute('src','#hit');
+      console.log("box03 hit");
+      });
+
+      box04.addEventListener('click', function () {
+      box04.setAttribute('material','opacity:1');
+      box04.setAttribute('src','#miss');
+      console.log("box04 hit");
+      });
+
+      box05.addEventListener('click', function () {
+      box05.setAttribute('material','opacity:1');
+      box05.setAttribute('src','#hit');
+      console.log("box05 hit");
+      });
+
+      box06.addEventListener('click', function () {
+      box06.setAttribute('material','opacity:1');
+      box06.setAttribute('src','#hit');
+      console.log("box05 hit");
+      });
+
+    </script>
+  </body>
+  </html>

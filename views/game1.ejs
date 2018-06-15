@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>テストページ001</title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <div id="app">
+        <a-scene>
+            <a-assets>
+                <img id="last" crossorigin="anonymous" src="hdri_image/03-Ueno-Shrine_8k_3.jpg">
+                <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
+                <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
+            </a-assets>
+
+            <a-sky id="image-360" radius="10" src="#last"></a-sky>
+
+            <a-plane id="box01" class="box" position="7.363 0.931 5.88" rotation="6.99 -109.392 -4.090" scale="3 3 3" color="#FFFFFF"  material="opacity:0" ></a-plane><!--はずれ-->
+            <a-plane id="box02" class="box" position="-1 1 9.6" rotation="0 173.580 0" scale="1.7 1.7 1.7" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+            <a-plane id="box03" class="box" position="-9.588 -1.86 -0.402" rotation="-5.571 88.581 1.490" scale="2 2 2" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+            <a-plane id="box04" class="box" position="-8.438 -0.465 -5.087" rotation="-6.459 58.599 -1.542" scale="1 2 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+            <a-plane id="box05" class="box" position="-6.122 7.222 -1.670" rotation="50.481 73.8792 -7.750" scale="2 2 2" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+            <a-plane id="box06" class="box" position="9.639 -0.075 -0.720" rotation="0 -90 0" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+            <a-plane id="box07" class="box" position="-8.195 -4.967 2.329" rotation="-31.933 98.163 -1.313" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+
+            <a-camera>
+                <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+                    <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+                    <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+                </a-entity>
+            </a-camera>
+        </a-scene>
+        <div class="userData">
+            <%= user %>
+        </div>
+        <div class="chatArea">
+            <ul id="messages">
+            </ul>
+        </div>
+		<div class="getArea">
+			<p class="getArea__ttl">
+				ほっこりカウント
+			</p>
+            <p class="getArea__count">
+                <span>0</span>/3
+            </p>
+		</div>
+		<div class="getImg">
+			<img src="/img/pengin_big.png" alt="つかまえた！！" class="animated">
+		</div>
+    </div>
+    <script>
+		const socket = io();
+        let current = "page01"
+		let getHit = 0
+        let getMiss = 0
+
+		//ログエリアの自動スクロール
+		const chatScroll = ()=> {
+			$('.chatArea').animate({scrollTop: $('.chatArea').get(0).scrollHeight}, '300');
+		}
+
+        //オブジェクトをクリックした時の処理
+        $('.box').on('click',(e)=>{
+            const target = $(e.currentTarget).attr('id');
+            const judge = () => target ==='box05' || target ==='box06' || target ==='box7'
+            const action_hit = () => {
+                $(e.currentTarget).attr({
+                    'material':'opacity:1',
+                    'src':'#hit'
+                })
+                getHit++
+                $('.getArea__count span').text(getHit)
+                //sio.jsに通知する
+                socket.emit('getMessageHit', {
+                    name :'<%= user %>',
+                    getnum : getHit,
+                });
+            }
+            const action_miss = () => {
+                $(e.currentTarget).attr({
+                    'material':'opacity:1',
+                    'src':'#miss'
+                })
+                getMiss++
+                 //sio.jsに通知する
+                socket.emit('getMessageMiss', {
+                    name :'<%= user %>',
+                    getnum : getMiss,
+                });
+            }
+            if(judge()){
+                action_hit();
+            }else{
+                action_miss();
+            }
+        });
+
+		//login
+
+		//sio.jsに通知
+		socket.on('connect',function(){
+			socket.emit('login',{
+				name:'<%= user %>',
+			})
+		})
+		//sio.jsから受け取る
+		socket.on('login', (data) => {
+            console.log(data.name)
+            $('#messages').append(`
+                <li class="login">
+                    <p class="msg">${data.username}がゲームを開始しました。</p>
+                </li>
+            `);
+            chatScroll();
+        });
+
+        //logout
+
+		//sio.jsに通知
+        $(window).on('beforeunload', function() {
+            socket.emit('logout',{
+                name:'<%= user %>',
+            })
+        });
+		//sio.jsから受け取る
+		socket.on('logout', (data) => {
+            console.log(data.name)
+            $('#messages').append(`
+                <li class="logout">
+                    <p class="msg">${data.username}が退室しました。</p>
+                </li>
+            `);
+        });
+
+		//ログエリアへの出力
+        socket.on('getMessageHit', (data) => {
+			$('#messages').append(`
+	                <li>
+						<p>
+							${data.username}が${data.getnum}匹目の細貝さんを見つけました！
+						</p>
+	                </li>
+	            `);
+            chatScroll();
+        });
+    </script>
+</body>
+
+</html>

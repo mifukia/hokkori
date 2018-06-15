@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+  <html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <title>テストページ002</title>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+      <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    </head>
+    <body>
+
+      <a-scene>
+        <a-assets>
+          <img id="last" crossorigin="anonymous" src="hdri_image/PaperMill_A_8k_1.jpg">
+          <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
+          <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
+        </a-assets>
+
+        <a-sky id="image-360" radius="10" src="#last"></a-sky>
+
+        <a-plane id="box01" position="0.849 8.690 -4.301" rotation="58.710 -2.896 -1.93" scale="2 2 1" color="#FFFFFF"  material="opacity:0" ></a-plane><!--あたり-->
+        <a-plane id="box02" position="-7.089 1.059 -6.592" rotation="3.016 52.670 -0.527" scale="2 2 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+        <a-plane id="box03" position="6.327 0.83 7.532" rotation="0 -138.451 0" scale="1.5 1.5 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+        <a-plane id="box04" position="2.898 2.923 8.990" rotation="15.307 -168.613 1.795" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+        <a-plane id="box05" position="-6.735 7.277 -0.476" rotation="46.967 90 -4.660" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+
+        <a-camera>
+          <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+        </a-entity>
+      </a-camera>
+    </a-scene>
+
+    <script>
+    var box01 = document.getElementById('box01');
+    var box02 = document.getElementById('box02');
+    var box03 = document.getElementById('box03');
+    var box04 = document.getElementById('box04');
+    var box05 = document.getElementById('box05');
+
+
+     box01.addEventListener('click', function () {
+     box01.setAttribute('material','opacity:1');
+     box01.setAttribute('src','#hit');
+     console.log("box01 hit");
+     });
+      box02.addEventListener('click', function () {
+      box02.setAttribute('material','opacity:1');
+      box02.setAttribute('src','#miss');
+      console.log("box02 hit");
+      });
+
+      box03.addEventListener('click', function () {
+      box03.setAttribute('material','opacity:1');
+      box03.setAttribute('src','#miss');
+      console.log("box03 hit");
+      });
+
+      box04.addEventListener('click', function () {
+      box04.setAttribute('material','opacity:1');
+      box04.setAttribute('src','#hit');
+      console.log("box04 hit");
+      });
+
+      box05.addEventListener('click', function () {
+      box05.setAttribute('material','opacity:1');
+      box05.setAttribute('src','#hit');
+      console.log("box05 hit");
+      });
+
+    </script>
+  </body>
+  </html>

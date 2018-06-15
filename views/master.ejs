@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>テストページ001</title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <div id="app">
+        <div class="result">
+            {{usersData_uniq}}
+        </div>
+    </div>
+    <script>
+		const socket = io();
+        const master = new Vue({
+            el: '#app',
+            data: {
+                usersData:[],
+                usersData_uniq:[],
+            },
+            watch:{
+                usersData:function(){
+                    master.usersData_uniq = _.uniqBy(this.usersData,'username');
+                    console.log(11);
+                    console.log(this.usersData_uniq);
+                }
+            },
+            created: function(){
+                socket.on('getMessageHit', (data) => {
+                    this.usersData.push(data)
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>
