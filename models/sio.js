@@ -1,6 +1,13 @@
 module.exports = sio;
 var dateformat = require('dateformat');
 var sendmail = require('sendmail')();
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : '',
+    database : 'hosokai'
+});
 
 function sio(server) {
     var io = require('socket.io')(server);
@@ -19,10 +26,18 @@ function sio(server) {
             });
         })
         socket.on('getMessageHit', (data) => {
+            console.log(connection)
+            var test;
+            connection.query('select * from score', function (error, results, fields) {
+                if (error) throw error;
+               
+                test = results[0]
+            });
             io.emit('getMessageHit', {
-                username: data.name,
+                username: test,
 				getnum:data.getnum,
             });
+            // connection.query('INSERT INTO score (id, name, page, hit, miss, update_at, create_at) VALUES (NULL, '+data.name+', "1", '+data.getnum+', "0", "2018-06-15 00:00:00", "2018-06-15 00:00:00")');
         });
         socket.on('getMessageMiss', (data) => {
             io.emit('getMessageMiss', {
