@@ -45,6 +45,9 @@ function sio(server) {
                 getnum: data.getnum,
             });
         });
+        socket.on('gameset', (data) => {
+            io.emit('gameset')
+        });
         socket.on('inv', (data) => {
             console.log(data.address);
 
