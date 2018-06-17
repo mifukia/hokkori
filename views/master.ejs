@@ -21,26 +21,36 @@
         <div class="result">
             {{usersData_uniq}}
         </div>
+        <div class="controller">
+            <div class="controller__gameset" @click="gameset">
+                ゲームを終了する
+            </div>
+        </div>
     </div>
     <script>
-		const socket = io();
+        const socket = io();
         const master = new Vue({
             el: '#app',
             data: {
-                usersData:[],
-                usersData_uniq:[],
+                usersData: [],
+                usersData_uniq: [],
             },
-            watch:{
-                usersData:function(){
-                    master.usersData_uniq = _.uniqBy(this.usersData,'username');
-                    console.log(11);
+            watch: {
+                usersData: function() {
+                    master.usersData_uniq = _.uniqBy(this.usersData, 'username');
                     console.log(this.usersData_uniq);
                 }
             },
-            created: function(){
+            created: function() {
                 socket.on('getMessageHit', (data) => {
                     this.usersData.push(data)
                 })
+            },
+            methods: {
+                gameset: function() {
+                    //sio.jsに通知する
+                    socket.emit('gameset');
+                }
             }
         });
     </script>

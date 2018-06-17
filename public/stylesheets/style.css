@@ -3940,6 +3940,32 @@ blockquote:before {
       top: auto;
       bottom: 5%; } }
 
+#app .gameset {
+  position: fixed;
+  background: #fff;
+  width: 80%;
+  padding: 5%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  z-index: 3; }
+
+#app .controller__gameset {
+  cursor: pointer; }
+
+#app .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  z-index: 2;
+  display: none; }
+
 #app .username {
   font-size: 13px;
   display: block; }
@@ -3977,6 +4003,11 @@ blockquote:before {
     margin-top: 0.5em; }
     #app .getArea__count span {
       font-size: 24px; }
+  #app .getArea__gif {
+    position: fixed;
+    top: 50%;
+    left: 2%;
+    transform: translate(-50%, -50%); }
 
 #app .getImg {
   position: fixed;

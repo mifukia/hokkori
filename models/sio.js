@@ -21,13 +21,13 @@ function sio(server) {
         socket.on('getMessageHit', (data) => {
             io.emit('getMessageHit', {
                 username: data.name,
-				getnum:data.getnum,
+                getnum: data.getnum,
             });
         });
         socket.on('getMessageMiss', (data) => {
             io.emit('getMessageMiss', {
                 username: data.name,
-				getnum:data.getnum,
+                getnum: data.getnum,
             });
         });
         socket.on('inv', (data) => {
