@@ -16,7 +16,14 @@ function sio(server) {
         socket.on('login', (data) => {
             socket.broadcast.emit('login', {
                 username: data.name,
-                time: dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss'),
+                firstget: 0,
+                firstmiss: 0,
+                secondhit: 0,
+                secondmiss: 0,
+                thirdhit: 0,
+                thirdmiss: 0,
+                fourthhit: 0,
+                fourthmiss: 0,
             });
         });
         socket.on('logout', (data) => {

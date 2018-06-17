@@ -19,7 +19,7 @@
 <body>
     <div id="app">
         <div class="result">
-            {{usersData_uniq}}
+            {{usersData}}
         </div>
         <div class="controller">
             <div class="controller__gameset" @click="gameset">
@@ -33,16 +33,15 @@
             el: '#app',
             data: {
                 usersData: [],
-                usersData_uniq: [],
             },
-            watch: {
-                usersData: function() {
-                    master.usersData_uniq = _.uniqBy(this.usersData, 'username');
-                    console.log(this.usersData_uniq);
-                }
-            },
+            // watch: {
+            //     usersData: function() {
+            //         master.usersData_uniq = _.uniqBy(this.usersData, 'username');
+            //         console.log(this.usersData_uniq);
+            //     }
+            // },
             created: function() {
-                socket.on('getMessageHit', (data) => {
+                socket.on('login', (data) => {
                     this.usersData.push(data)
                 })
             },
