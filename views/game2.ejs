@@ -118,7 +118,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
-                    page:1,
+                    page:'secondhit',
                 });
             }
             const action_miss = () => {
@@ -131,7 +131,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
-                    page:1,
+                    page:'secondmiss',
                 });
             }
             if (judge()) {
@@ -178,7 +178,7 @@
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     $('.count').css('visibility','hidden')
-                    $('.count').hide();
+                    $('.overlay').hide();
                 },500)
             })
         }
@@ -192,12 +192,9 @@
             .then(func04)
             .then(func05)
         }
-        $('.overlay').on('click',()=> {
+        socket.on('gamestart', (data) => {
             gameStart();
-        })
-        // socket.on('gameStart', (data) => {
-        //     gameStart();
-        // }
+        });
 
         //ログエリアへの出力
         socket.on('getMessageHit', (data) => {

@@ -239,6 +239,9 @@
             .then(func04)
             .then(func05)
         };
+        socket.on('gamestart', (data) => {
+            gameStart();
+        });
 
         //ログエリアへの出力
         socket.on('getMessageHit', (data) => {
@@ -252,10 +255,7 @@
             chatScroll();
         });
 
-        socket.on('gamestart', (data) => {
-            alert();
-            gameStart();
-        });
+
 
         //マスターからゲームセットを受けた時の処理
         socket.on('gameset', (data) => {
