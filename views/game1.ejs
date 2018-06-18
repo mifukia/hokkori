@@ -71,9 +71,12 @@
                 <a href="/game2">次のゲームへ進む</a>
             </div>
         </div>
-        <div class="overlay"></div>
+        <div class="overlay">
+            <div class="count"></div>
+        </div>
     </div>
     <script>
+
         const socket = io();
         let current = "page01"
         let getHit = 0
@@ -118,6 +121,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
+                    page: 1,
                 });
             }
             const action_miss = () => {
@@ -130,6 +134,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
+                    page: 1,
                 });
             }
             if (judge()) {
@@ -175,6 +180,64 @@
                 </li>
             `);
         });
+
+        function func01(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },1000)
+            })
+        }
+        function func02(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func03(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func04(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').css('color', 'red');
+                    $('.count').text("GO!!");
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func05(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').css('visibility','hidden')
+                    $('.count').hide();
+                },500)
+            })
+        }
+
+        function gameStart() {
+            $('.count').css('visibility','visible')
+            $('.count').css('animation-name','fadeIn')
+            func01(3)
+            .then(func02)
+            .then(func03)
+            .then(func04)
+            .then(func05)
+        }
+        $('.overlay').on('click',()=> {
+            gameStart();
+        })
+        // socket.on('gameStart', (data) => {
+        //     gameStart();
+        // }
 
         //ログエリアへの出力
         socket.on('getMessageHit', (data) => {
