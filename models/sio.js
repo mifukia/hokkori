@@ -32,7 +32,7 @@ function sio(server) {
             // });
             socket.broadcast.emit('login', {
                 username: data.name,
-                firstget: 0,
+                firsthit: 0,
                 firstmiss: 0,
                 secondhit: 0,
                 secondmiss: 0,
