@@ -139,39 +139,38 @@
         //login
 
         //sio.jsに通知
-        socket.on('connect', function() {
-                socket.emit('login', {
-                    name: '<%= user %>',
-                })
-            })
+        // socket.on('connect', function() {
+        //     socket.emit('login', {
+        //         name: '<%= user %>',
+        //     })
+        // })
             //sio.jsから受け取る
-        socket.on('login', (data) => {
-            console.log(data.name)
-            $('#messages').append(`
-                <li class="login">
-                    <p class="msg">${data.username}がゲームを開始しました。</p>
-                </li>
-            `);
-            chatScroll();
-        });
-
+        // socket.on('login', (data) => {
+        //     console.log(data.name)
+        //     $('#messages').append(`
+        //         <li class="login">
+        //             <p class="msg">${data.username}がゲームを開始しました。</p>
+        //         </li>
+        //     `);
+        //     chatScroll();
+        // });
         //logout
 
         //sio.jsに通知
-        $(window).on('beforeunload', function() {
-            socket.emit('logout', {
-                name: '<%= user %>',
-            })
-        });
+        // $(window).on('beforeunload', function() {
+        //     socket.emit('logout', {
+        //         name: '<%= user %>',
+        //     })
+        // });
         //sio.jsから受け取る
-        socket.on('logout', (data) => {
-            console.log(data.name)
-            $('#messages').append(`
-                <li class="logout">
-                    <p class="msg">${data.username}が退室しました。</p>
-                </li>
-            `);
-        });
+        // socket.on('logout', (data) => {
+        //     console.log(data.name)
+        //     $('#messages').append(`
+        //         <li class="logout">
+        //             <p class="msg">${data.username}が退室しました。</p>
+        //         </li>
+        //     `);
+        // });
 
         function func01(num) {
             return new Promise((resolve, reject) => {

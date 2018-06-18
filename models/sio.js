@@ -22,6 +22,7 @@ function sio(server) {
     //接続
     io.on('connection', (socket) => {
         socket.on('login', (data) => {
+            console.log(data);
             // connection.query('select * from score', function(err, rows, fields) {
             //     if (err) { console.log('err: ' + err); }
 

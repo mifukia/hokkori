@@ -139,21 +139,21 @@
         //login
 
         //sio.jsに通知
-        socket.on('connect', function() {
-                socket.emit('login', {
-                    name: '<%= user %>',
-                })
-            })
+        // socket.on('connect', function() {
+        //         socket.emit('login', {
+        //             name: '<%= user %>',
+        //         })
+        //     })
             //sio.jsから受け取る
-        socket.on('login', (data) => {
-            console.log(data.name)
-            $('#messages').append(`
-                <li class="login">
-                    <p class="msg">${data.username}がゲームを開始しました。</p>
-                </li>
-            `);
-            chatScroll();
-        });
+        // socket.on('login', (data) => {
+        //     console.log(data.name)
+        //     $('#messages').append(`
+        //         <li class="login">
+        //             <p class="msg">${data.username}がゲームを開始しました。</p>
+        //         </li>
+        //     `);
+        //     chatScroll();
+        // });
 
         //logout
 

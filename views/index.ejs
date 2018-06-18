@@ -18,7 +18,7 @@
     <div class="formWrap">
         <form method="post" action="/game4">
             <div class="form-group">
-                <input type="text" name="username" placeholder="お名前"/ class="form-control">
+                <input type="text" name="username" placeholder="お名前" class="form-control">
             </div>
             <button class="form-btn">
                 <img src="img/hokkori_btn.png" alt="">
@@ -26,5 +26,16 @@
         </form>
     </div>
 </body>
+<script>
+    const socket = io();
+    //loginイベント発行してsio.jsに渡す
+    $('.form-btn').on('click', () => {
+        const loginName = $('.form-control').val();
+        socket.emit('login', {
+            name: loginName
+        });
+    })
+
+</script>
 
 </html>
