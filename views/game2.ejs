@@ -4,76 +4,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>
-        seekers
-    </title>
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css' />
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>テストページ002</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
     <div id="app">
         <a-scene>
             <a-assets>
-                <img id="subway" crossorigin="anonymous" src="/hdri_image/20_Subway_Lights_8k.jpg">
-                <!--1-->
-                <img id="apt" crossorigin="anonymous" src="hdri_image/Alexs_Apt_8k.jpg"><!--2-->
-                <img id="GC" crossorigin="anonymous" src="hdri_image/GCanyon_C_YumaPoint_8k.jpg"><!--3-->
-                <img id="roof" crossorigin="anonymous" src="hdri_image/Barce_Rooftop_C_8k.jpg"><!--4-->
-                <img id="ueno" crossorigin="anonymous" src="/hdri_image/03-Ueno-Shrine_8k.jpg">
-                <!--5-->
-                <img id="pine" crossorigin="anonymous" src="hdri_image/Arches_E_PineTree_8k.jpg"><!--6-->
-                <img id="brok" crossorigin="anonymous" src="hdri_image/Brooklyn_Bridge_Planks_tmap.jpg"><!--7-->
-                <img id="prk" crossorigin="anonymous" src="hdri_image/Bryant_Park_8k.jpg"><!--8-->
-                <img id="stair" crossorigin="anonymous" src="hdri_image/Chelsea_Stairs_8k.jpg"><!--9-->
-                <img id="circus" crossorigin="anonymous" src="hdri_image/Circus_Backstage_8k.jpg"><!--10-->
-                <img id="tokyo" crossorigin="anonymous" src="/hdri_image/Tokyo_BigSight_8k.jpg">
-                <!--11-->
-                <img id="theater" crossorigin="anonymous" src="hdri_image/Theatre-Center_8k_TMap.jpg"><!--12-->
-                <img id="LA" crossorigin="anonymous" src="hdri_image/LA_Downtown_Helipad_GoldenHour_8k.jpg"><!--13-->
-                <img id="last" crossorigin="anonymous" src="hdri_image/Malibu_Overlook_8k.jpg"><!--14-->
-
-                <a-asset-item id="pengin-obj" src="/obj/model3.obj"></a-asset-item>
-                <a-asset-item id="pengin-mtl" src="/obj/model3.mtl"></a-asset-item>
-
-                <img id="door1" crossorigin="anonymous" src="/img/door.png">
-                <img id="door2" crossorigin="anonymous" src="/img/door.png">
-                <img id="door3" crossorigin="anonymous" src="/img/door.png">
-
-                <!-- りんくのてんぷれ. -->
-                <script id="link" type="text/html">
-                    <a-entity class="link" geometry="primitive: plane; height: 1; width: 1" material="shader: flat; src: ${thumb}" event-set__1="_event: mousedown; scale: 1 1 1" event-set__2="_event: mouseup; scale: 1.2 1.2 1" event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
-                        event-set__4="_event: mouseleave; scale: 1 1 1" set-image="on: click; target: #image-360; src: ${src}"></a-entity>
-                </script>
+                <img id="last" crossorigin="anonymous" src="hdri_image/PaperMill_A_8k_1.jpg">
+                <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
+                <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
             </a-assets>
 
-            <!--かめらとかーそる. -->
-            <a-entity camera look-controls>
-                <a-cursor id="cursor" animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150" animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500" event-set__1="_event: mouseenter; color: springgreen"
-                    event-set__2="_event: mouseleave; color: black" fuse="true" raycaster="objects: .link"></a-cursor>
-            </a-entity>
-			<a-obj-model id="pengin1" class="link pengin" src="#pengin-obj" mtl="#pengin-mtl" position="-1.1026257326073614 -7.289398567811949 -6.262852532064665" rotation="0 9.678 0" scale="0 0 0">
-				<a-animation attribute="rotation" repeat="indefinite" direction="alternate" dur="500" from="0 0 0" to="0 10 0"></a-animation>
-			</a-obj-model>
-            <!-- 360-どのいめーじ. -->
-            <a-sky id="image-360" radius="10" src="#subway"></a-sky>
+            <a-sky id="image-360" radius="10" src="#last"></a-sky>
 
-            <!--いめーじのりんく. -->
+            <a-plane id="box01" position="0.849 8.690 -4.301" rotation="58.710 -2.896 -1.93" scale="2 2 1" color="#FFFFFF"  material="opacity:0" ></a-plane><!--あたり-->
+            <a-plane id="box02" position="-7.089 1.059 -6.592" rotation="3.016 52.670 -0.527" scale="2 2 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+            <a-plane id="box03" position="6.327 0.83 7.532" rotation="0 -138.451 0" scale="1.5 1.5 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
+            <a-plane id="box04" position="2.898 2.923 8.990" rotation="15.307 -168.613 1.795" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+            <a-plane id="box05" position="-6.735 7.277 -0.476" rotation="46.967 90 -4.660" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
 
-            <a-entity id="page01" template="src:#link" data-src="#door1" data-thumb="#door1" position="0.8013270208556865 -0.3805442640921106 -9.841972550033093" material="opacity:0.5" rotation="-1.708560180977743 -9.085071451615942 0.2731678711090058"></a-entity>
-
-            <a-entity id="page02" template="src:#link" data-src="#door2" data-thumb="#door2" position="-9.82810969065634 0 -0.281906716500433" material="opacity:0.5" rotation="0 90 0"></a-entity>
-
-            <a-entity id="page03" template="src:#link" data-src="#door3" data-thumb="#door3" position="1.1773105824289125 -0.13123137713576083 9.546175561189253" material="opacity:0.5" rotation="0 178.10388178535206 0"></a-entity>
-
+            <a-camera>
+                <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+                  <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+                  <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+              </a-entity>
+            </a-camera>
         </a-scene>
         <div class="userData">
             <%= user %>
@@ -82,125 +45,106 @@
             <ul id="messages">
             </ul>
         </div>
-		<div class="getArea">
-			<p class="getArea__ttl">
-				つかまえたペンギン
-			</p>
-			<ul>
-				<li><img src="/img/pengin_off.png" alt="ペンギン"></li>
-				<li><img src="/img/pengin_off.png" alt="ペンギン"></li>
-				<li><img src="/img/pengin_off.png" alt="ペンギン"></li>
-			</ul>
-		</div>
-		<div class="radar">
-			<div class="wrap">
-			  <div class="boder"></div>
-			  <div class="circle circle-basic circle-puton"></div>
-			  <div class="circle circle-puton circle-infinit-1"></div>
-			  <div class="circle circle-puton circle-infinit-2"></div>
-			  <div class="circle circle-puton circle-infinit-3"></div>
-			  <div class="circle circle-puton circle-infinit-4"></div>
-			</div>
-		</div>
-		<div class="getImg">
-			<img src="/img/pengin_big.png" alt="つかまえた！！" class="animated">
-		</div>
+        <div class="getArea">
+            <p class="getArea__ttl">
+                ほっこりカウント
+            </p>
+            <p class="getArea__count">
+                <span>0</span>/3
+            </p>
+        </div>
+        <p class="getArea__gif"><img src="" alt=""></p>
+        <div class="getImg">
+            <img src="/img/pengin_big.png" alt="つかまえた！！" class="animated">
+        </div>
+        <div class="gameset">
+            <div class="gameset__link">
+                <a href="/game2">次のゲームへ進む</a>
+            </div>
+        </div>
+        <div class="overlay">
+            <div class="count"></div>
+        </div>
     </div>
     <script>
-		const socket = io();
+
+        const socket = io();
         let current = "page01"
-		let getNum = 0
-		let getPengin = []
+        let getHit = 0
+        let getMiss = 0
 
-		//ログエリアの自動スクロール
-		const chatScroll = ()=> {
-			$('.chatArea').animate({scrollTop: $('.chatArea').get(0).scrollHeight}, '300');
-		}
-		const linkChange = (el)=>{
-			const link = 'link'+el
-			//背景を変更
-			$('#image-360').attr('src',page[links[current][link]].src);
-			//ドアのリンク先を変更
-			$('#page01').attr({
-                'position':page[links[current][link]].position1,
-                'rotation':page[links[current][link]].rotation1,
-                'scale':page[links[current][link]].scale1,
-            })
-			$('#page02').attr({
-                'position':page[links[current][link]].position2,
-                'rotation':page[links[current][link]].rotation2,
-                'scale':page[links[current][link]].scale2,
-            })
-			$('#page03').attr({
-                'position':page[links[current][link]].position3,
-                'rotation':page[links[current][link]].rotation3,
-                'scale':page[links[current][link]].scale3,
-            })
-			//カレントを変更
-			current = links[current][link]
+        //ログエリアの自動スクロール
+        const chatScroll = () => {
+            $('.chatArea').animate({
+                scrollTop: $('.chatArea').get(0).scrollHeight
+            }, '300');
+        }
 
-			//カレントによってペンギンとレーダーを出し分ける
-			if(current === "page05" && getPengin.indexOf("pengin1") == -1 ){
-				$('#pengin1').attr('scale',"3 3 3")
-				$('.radar').addClass('red');
-			}else{
-				$('#pengin1').attr('scale',"0 0 0");
-				$('.radar').removeClass('red');
-			}
-
-			//sio.jsに通知する
-			socket.emit('chat message', {
-	           name :'<%= user %>',
-			   message:'がエリアを移動しました。'
-	        });
-			console.log(current);
-		}
-
-		//ドアをクリック時の処理
-        $('#page01').on('click',()=>{
-            linkChange(1);
+        //オブジェクトをクリックした時の処理
+        $('.box').on('click', (e) => {
+            const target = $(e.currentTarget).attr('id');
+            const judge = () => target === 'box01' || target === 'box04' || target === 'box05'
+            const action_hit = () => {
+                $(e.currentTarget).attr({
+                    'material': 'opacity:1',
+                    'src': '#hit'
+                })
+                getHit++
+                switch (getHit) {
+                    case 1:
+                        $('.getArea__gif img').attr('src', "/img/hokkorihan_1.gif");
+                        setTimeout(() => {
+                            $('.getArea__gif img').attr('src', "");
+                        }, 3000)
+                        break;
+                    case 2:
+                        $('.getArea__gif img').attr('src', "/img/hokkorihan_2.gif");
+                        setTimeout(() => {
+                            $('.getArea__gif img').attr('src', "");
+                        }, 3000)
+                        break;
+                    case 3:
+                        $('.getArea__gif img').attr('src', "/img/hokkorihan_3.gif");
+                        break;
+                }
+                $('.getArea__count span').text(getHit);
+                //sio.jsに通知する
+                socket.emit('getMessageHit', {
+                    name: '<%= user %>',
+                    getnum: getHit,
+                    page:1,
+                });
+            }
+            const action_miss = () => {
+                $(e.currentTarget).attr({
+                    'material': 'opacity:1',
+                    'src': '#miss'
+                })
+                getMiss++
+                //sio.jsに通知する
+                socket.emit('getMessageMiss', {
+                    name: '<%= user %>',
+                    getnum: getMiss,
+                    page:1,
+                });
+            }
+            if (judge()) {
+                action_hit();
+            } else {
+                action_miss();
+            }
         });
-        $('#page02').on('click',()=>{
-            linkChange(2);
-        });
-        $('#page03').on('click',()=>{
-            linkChange(3);
-        })
 
-		//ペンギンをクリックした時の処理
-		$('.pengin').on('click',(e)=>{
-			let id = $(e.currentTarget).attr('id');
-			$('#'+id).attr('scale','0 0 0');
-			//見つけたペンギンの数を増やす
-			getNum += 1;
-			//見つけたペンギンのリストにプッシュする
-			getPengin.push(id);
-			//ペンギンリストの見つけたペンギンをonにする
-			$('.getArea img').eq(getNum - 1).attr('src','/img/pengin_on.png')
-			$('.getImg').show();
-			$('.getImg img').addClass('bounceIn');
-			setTimeout(()=>{
-				$('.getImg').hide();
-				$('.getImg img').removeClass('bounceIn');
-				$('.radar').removeClass('red');
-			},1000)
-			//sio.jsに通知する
-			socket.emit('chat message', {
-	           name :'<%= user %>',
-			   getnum : getNum,
-	        });
-		})
+        //login
 
-		//login
-
-		//sio.jsに通知
-		socket.on('connect',function(){
-			socket.emit('login',{
-				name:'<%= user %>',
-			})
-		})
-		//sio.jsから受け取る
-		socket.on('login', (data) => {
+        //sio.jsに通知
+        socket.on('connect', function() {
+                socket.emit('login', {
+                    name: '<%= user %>',
+                })
+            })
+            //sio.jsから受け取る
+        socket.on('login', (data) => {
             console.log(data.name)
             $('#messages').append(`
                 <li class="login">
@@ -212,14 +156,14 @@
 
         //logout
 
-		//sio.jsに通知
+        //sio.jsに通知
         $(window).on('beforeunload', function() {
-            socket.emit('logout',{
-                name:'<%= user %>',
+            socket.emit('logout', {
+                name: '<%= user %>',
             })
         });
-		//sio.jsから受け取る
-		socket.on('logout', (data) => {
+        //sio.jsから受け取る
+        socket.on('logout', (data) => {
             console.log(data.name)
             $('#messages').append(`
                 <li class="logout">
@@ -228,289 +172,80 @@
             `);
         });
 
-		//ログエリアへの出力
-        socket.on('chat message', (data) => {
-			if(data.getnum !== undefined){
-				$('#messages').append(`
+        function func01(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },1000)
+            })
+        }
+        function func02(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func03(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').text(num);
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func04(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').css('color', 'red');
+                    $('.count').text("GO!!");
+                    resolve(num-1);
+                },500)
+            })
+        }
+        function func05(num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    $('.count').css('visibility','hidden')
+                    $('.count').hide();
+                },500)
+            })
+        }
+
+        function gameStart() {
+            $('.count').css('visibility','visible')
+            $('.count').css('animation-name','fadeIn')
+            func01(3)
+            .then(func02)
+            .then(func03)
+            .then(func04)
+            .then(func05)
+        }
+        $('.overlay').on('click',()=> {
+            gameStart();
+        })
+        // socket.on('gameStart', (data) => {
+        //     gameStart();
+        // }
+
+        //ログエリアへの出力
+        socket.on('getMessageHit', (data) => {
+            $('#messages').append(`
 	                <li>
 						<p>
-							${data.username}が${data.getnum}匹目のペンギンを捕まえました！
+							${data.username}が${data.getnum}匹目の細貝さんを見つけました！
 						</p>
 	                </li>
 	            `);
-			}else{
-				$('#messages').append(`
-	                <li>
-						<p>
-							${data.username}${data.message}
-						</p>
-	                </li>
-	            `);
-			}
             chatScroll();
         });
 
-
-		// $('.msgForm').submit(() => {
-        //     socket.emit('chat message', {
-        //         message :$('#m').val(),
-        //         name :'<%= user %>',
-        //         mail :'<%= mail %>'
-        //     });
-        //     $('#m').val('');
-        //     return false;
-        // });
-        // $('.invForm').submit(() => {
-        //     socket.emit('inv', {
-        //         address :$('#inv').val(),
-        //     });
-        //     $('#inv').val('');
-        //     $('.closeBtn').trigger('click');
-        //     return false;
-        // });
-		const links = {
-            page01:{
-                link1:"page05",
-                link2:"page11",
-                link3:"page03"
-            },
-            page02:{
-                link1:"page08",
-                link2:"page01",
-                link3:"page09"
-            },
-            page03:{
-                link1:"page05",
-                link2:"page10",
-                link3:"page06"
-            },
-            page04:{
-                link1:"page09",
-                link2:"page06",
-                link3:"page08"
-            },
-            page05:{
-                link1:"page13",
-                link2:"page11",
-                link3:"page03"
-            },
-            page06:{
-                link1:"page02",
-                link2:"page12",
-                link3:"page03"
-            },
-            page07:{
-                link1:"page01",
-                link2:"page08",
-                link3:"page11"
-            },
-            page08:{
-                link1:"page13",
-                link2:"page07",
-                link3:"page04"
-            },
-            page09:{
-                link1:"page07",
-                link2:"page04",
-                link3:"page02"
-            },
-            page10:{
-                link1:"page13",
-                link2:"page12",
-                link3:"page02"
-            },
-            page11:{
-                link1:"page05",
-                link2:"page01",
-                link3:"page04"
-            },
-            page12:{
-                link1:"page10",
-                link2:"page09",
-                link3:"page14"
-            },
-            page13:{
-                link1:"page08",
-                link2:"page07",
-                link3:"page04"
-            },
-            page14:{
-                link1:"page05",
-                link2:"page11",
-                link3:"page03"
-            },
-        }
-        const page = {
-            page01:{
-                src:"#subway",
-                position1:"0.8013270208556865 -0.3805442640921106 -9.841972550033093",
-                position2:"-9.82810969065634 0 -0.281906716500433",
-                position3:"1.1773105824289125 -0.13123137713576083 9.546175561189253",
-                rotation1:"-1.708560180977743 -9.085071451615942 0.2731678711090058",
-                rotation2:"0 90 0",
-                rotation3:"0 178.10388178535206 0",
-                scale1:"1 1 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-
-            },
-            page02:{
-                src:"#apt",
-                position1:"-7.300673778563838 1.0213624507439265 -5.116257863064255",
-                position2:"-9.187933117095334 -3.032435779023799 0.6950930668392971",
-                position3:"9.747235597399385 -0.11486175014231292 0.6032821755902464",
-                rotation1:"-1.7085601809777433 24.147646026474046 0.2731678711090056",
-                rotation2:"0 90 0",
-                rotation3:"0 -85.35011833437729 0",
-                scale1:"1 1 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-            page03:{
-                src:"#GC",
-                position1:"0 -9.908325377814965 0",
-                position2:"0 9 0",
-                position3:"8.892036048441637 0 0.122",
-                rotation1:"-90 0 0",
-                rotation2:"90 90 0",
-                rotation3:"0 -90 0",
-                scale1:"1.5 1.5 1.5",
-                scale2:"2 2 2",
-                scale3:"2 2 2"
-            },
-            page04:{
-                src:"#roof",
-                position1:"8.682932034010692 -0.381 4.195970717326166",
-                position2:"-0.862405158683379 -4.800209155011231 7.887134353508532",
-                position3:"-8.670029086118058 0.2600316287268237 -1.812633080049494",
-                rotation1:"-1.7089999999999999 -106.62597467455757 0.2730000000000001",
-                rotation2:"-73.36448539696217 90.42880441077497 108.27540934958967",
-                rotation3:"0 81.96663676229771 0",
-                scale1:"2 2 2",
-                scale2:"1.5 1.5 1.5",
-                scale3:"1 1 1"
-            },
-            page05:{
-                src:"#ueno",
-                position1:"0.01816657183815007 9.552443612639626 -0.28033174919878323",
-                position2:"-9.82810969065634 0.33162423260477447 -0.13864662504063152",
-                position3:"9 0 0",
-                rotation1:"90 0 90",
-                rotation2:"0 90 0",
-                rotation3:"0 -90 0",
-                scale1:"2 2 1",
-                scale2:"1.5 1.5 1",
-                scale3:"1.5 1.5 1"
-            },
-            page06:{
-                src:"#pine",
-                position1:"0.9227432602282967 -0.381 -9.842",
-                position2:"-8.779849879751147 0 -4.3088017872027855",
-                position3:"-8.602294633268738 -0.13123137713576083 4.747053548199775",
-                rotation1:"1.7089999999999999 -12.878805085964919 0.27299999999999996",
-                rotation2:"0 71.46787997328317 0",
-                rotation3:"0 111.68749326108167 0",
-                scale1:"1 1 1",
-                scale2:"0.8 0.8 1",
-                scale3:"0.8 0.8 1"
-            },
-            page07:{
-                src:"#brok",
-                position1:"1.409947588809099 -0.381 -9.416705518541772",
-                position2:"-9.000919733823814 1.255721154403817 -0.05098651036283908",
-                position3:"4.518883243746121 -0.13123137713576083 7.9206442478848995",
-                rotation1:"-1.709 -9.085 0.273",
-                rotation2:"0 90 0",
-                rotation3:"0 -150.89794366129667 0",
-                scale1:"1 1 1",
-                scale2:"0.5 0.5 1",
-                scale3:"1 1 1"
-            },
-            page08:{
-                src:"#prk",
-                position1:"4.271007824627711 6.786723724654983 -5.5752703007901765",
-                position2:"-9.82810969065634 0 -0.281906716500433",
-                position3:"8.804903347213692 0.8848190257469982 -2.982462386674114",
-                rotation1:"0 -24.568128227029646 0",
-                rotation2:"0 90 0",
-                rotation3:"0 -90 0",
-                scale1:"0.5 0.5 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-            page09:{
-                src:"#stair",
-                position1:"-4.8 -5.6 4",
-                position2:"-4.924980397370183 7.98197461400763 0.39207775172946624",
-                position3:"8 0 -4.568247591724443",
-                rotation1:"-13 165 1.4262474279472787e-15",
-                rotation2:"49.65495922121811 90 -9.825789713450866e-15",
-                rotation3:"0 -90 0",
-                scale1:"1 1 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-            page10:{
-                src:"#circus",
-                position1:"-1.9690528614089247 8.420818324182648 -4.226146088637789",
-                position2:"-9.6 0 -2",
-                position3:"-5.207366131250414 -1.3806766619520485 8.1652347105235",
-                rotation1:"48.88259031098049 -16.1479120205642 0",
-                rotation2:"-3.3960834742881185 74.89357486221795 0.9161274409782978",
-                rotation3:"-1.6521236257773648 147.49468262956037 1.8608339045104423",
-                scale1:"0.8 0.8 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-            page11:{
-                src:"#tokyo",
-                position1:"8.91783265309069 0.17181015873434546 -3.0381668335997176",
-                position2:"-9.3 0 0",
-                position3:"0 0 9.6",
-                rotation1:"0 -90 0",
-                rotation2:"0 90 0",
-                rotation3:"0 180 0",
-                scale1:"1 1 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-            page12:{
-                src:"#theater",
-                position1:"-9.522810635567218 2.5 0",
-                position2:"-1.3 0 -9.8",
-                position3:"0 9.928651139352908 0",
-                rotation1:"0 90 0",
-                rotation2:"0 0 0",
-                rotation3:"90 0 0",
-                scale1:"1 1 1",
-                scale2:"0.5 0.5 1",
-                scale3:"1 1 1"
-            },
-            page13:{
-                src:"#LA",
-                position1:"3.4856775134188056 -1.137705336853747 -8.897674281001787",
-                position2:"-0.9855347411649334 -1.3849908941786881 9.422951659835011",
-                position3:"6.938427812815075 0.5083813909398734 6.662521117309716",
-                rotation1:"-1.7089999999999999 -33.08454906172267 0.27299999999999996",
-                rotation2:"0 180 0",
-                rotation3:"0 -127.56393323279188 0",
-                scale1:"1 1 1",
-                scale2:"0.8 0.8 1",
-                scale3:"0.5 0.5 1"
-            },
-            page14:{
-                src:"#last",
-                position1:"",
-                position2:"",
-                position3:"",
-                rotation1:"",
-                rotation2:"",
-                rotation3:"",
-                scale1:"1 1 1",
-                scale2:"1 1 1",
-                scale3:"1 1 1"
-            },
-        }
+        //マスターからゲームセットを受けた時の処理
+        socket.on('gameset', (data) => {
+            $('.gameset,.overlay').show();
+        });
     </script>
 </body>
 
