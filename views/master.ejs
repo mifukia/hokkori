@@ -25,6 +25,9 @@
             <div class="controller__gameset" @click="gameset">
                 ゲームを終了する
             </div>
+            <p @click="gethit('下地明文','firstget',1)">
+                hoge
+            </p>
         </div>
     </div>
     <script>
@@ -32,30 +35,7 @@
         const master = new Vue({
             el: '#app',
             data: {
-                usersData: [
-                    {
-                        username: 'hoge',
-                        firstget: 0,
-                        firstmiss: 0,
-                        secondhit: 0,
-                        secondmiss: 0,
-                        thirdhit: 0,
-                        thirdmiss: 0,
-                        fourthhit: 0,
-                        fourthmiss: 0,
-                    },
-                    {
-                        username: 'fuga',
-                        firstget: 0,
-                        firstmiss: 0,
-                        secondhit: 0,
-                        secondmiss: 0,
-                        thirdhit: 0,
-                        thirdmiss: 0,
-                        fourthhit: 0,
-                        fourthmiss: 0,
-                    }
-                ],
+                usersData: [],
             },
             computed: {
                 usersData_uniq : function(){
@@ -68,6 +48,9 @@
                 socket.on('login', (data) => {
                     this.usersData.push(data)
                 })
+                socket.on('getMessageHit', (data) => {
+                    this.gethit(data.username,data.page,data.getnum);
+                })
             },
             methods: {
                 gameset: function() {
@@ -75,9 +58,10 @@
                     socket.emit('gameset');
                 },
                 gethit: function(name,page,num){
+                    console.log(name,page,num)
                     _.each(this.usersData,function(n){
                         if(n.username == name){
-                            n.page = num;
+                            n[page] = num;
                         }
                     })
                 }

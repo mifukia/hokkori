@@ -121,7 +121,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
-                    page:1,
+                    page:'firsthit',
                 });
             }
             const action_miss = () => {
@@ -134,7 +134,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
-                    page:1,
+                    page:'firstmiss',
                 });
             }
             if (judge()) {
@@ -219,6 +219,7 @@
                 setTimeout(() => {
                     $('.count').css('visibility','hidden')
                     $('.count').hide();
+                    $('.overlay').hide();
                 },500)
             })
         }
