@@ -65,7 +65,6 @@ function sio(server) {
             });
         });
         socket.on('gamestart', (data) => {
-            console.log("aaaaa")
             io.emit('gamestart')
         });
         socket.on('gameset', (data) => {

@@ -19,7 +19,58 @@
 <body>
     <div id="app">
         <div class="result">
-            {{usersData}}
+            <dl>
+                <dt>
+                    名前
+                </dt>
+                <dd>
+                    ほっこり①
+                </dd>
+                <dd>
+                    ひっこり①
+                </dd>
+                <dd>
+                    ほっこり②
+                </dd>
+                <dd>
+                    ひっこり②
+                </dd>
+                <dd>
+                    ほっこり③
+                </dd>
+                <dd>
+                    ひっこり③
+                </dd>
+                <dd>
+                    TOTAL
+                </dd>
+            </dl>
+            <dl v-for="item in usersData">
+                <dt>
+                    {{item.username}}
+                </dt>
+                <dd>
+                    {{item.firsthit}}
+                </dd>
+                <dd>
+                    {{item.firstmiss}}
+                </dd>
+                <dd>
+                    {{item.secondhit}}
+                </dd>
+                <dd>
+                    {{item.secondmiss}}
+                </dd>
+                <dd>
+                    {{item.thirdhit}}
+                </dd>
+                <dd>
+                    {{item.thirdmiss}}
+                </dd>
+                <dd>
+                    {{item.firsthit + item.firstmiss + item.secondhit + item.secondmiss + item.thirdhit + item.thirdmiss}}
+                </dd>
+            </dl>
         </div>
         <div class="controller">
             <div class="controller__gameset" @click="gameStart">
@@ -28,9 +79,6 @@
             <div class="controller__gameset" @click="gameset">
                 ゲームを終了する
             </div>
-            <p @click="gethit('下地明文','firstget',1)">
-                hoge
-            </p>
         </div>
     </div>
     <script>
@@ -40,19 +88,15 @@
             data: {
                 usersData: [],
             },
-            computed: {
-                usersData_uniq : function(){
-                    return _.mapKeys(this.usersData, (chara) => {
-                        return chara.username;
-                    });
-                }
-            },
             created: function() {
                 socket.on('login', (data) => {
                     this.usersData.push(data)
                 })
                 socket.on('getMessageHit', (data) => {
                     this.gethit(data.username,data.page,data.getnum);
+                })
+                socket.on('getMessageMiss', (data) => {
+                    this.getmiss(data.username,data.page,data.getnum);
                 })
             },
             methods: {
@@ -65,7 +109,13 @@
                     socket.emit('gameset');
                 },
                 gethit: function(name,page,num){
-                    console.log(name,page,num)
+                    _.each(this.usersData,function(n){
+                        if(n.username == name){
+                            n[page] = num;
+                        }
+                    })
+                },
+                getmiss: function(name,page,num){
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;

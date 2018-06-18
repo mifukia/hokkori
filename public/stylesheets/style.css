@@ -4043,29 +4043,22 @@ blockquote:before {
     #app .getImg {
       width: 60%; } }
 
-#app .radar {
-  background: rgba(0, 0, 0, 0.8);
-  position: fixed;
-  left: 10px;
-  top: 145px;
-  border-radius: 10px;
-  border: 5px solid #fff; }
-  @media print, screen and (max-width: 750px) {
-    #app .radar {
-      transform: scale(0.3);
-      transform-origin: top left;
-      top: 20%; } }
-  @media only screen and (max-width: 750px) and (orientation: landscape) {
-    #app .radar {
-      top: 42%; } }
-  #app .radar.yellow .boder {
-    animation: boder 2.5s linear 0s infinite normal none; }
-  #app .radar.yellow .circle {
-    background-color: yellow; }
-  #app .radar.red .boder {
-    animation: boder 1s linear 0s infinite normal none; }
-  #app .radar.red .circle {
-    background-color: red; }
+#app .result {
+  margin-top: 50px; }
+  #app .result dl {
+    width: 800px;
+    display: flex;
+    margin: 0 auto 0; }
+    #app .result dl dt {
+      width: 100px;
+      text-align: center;
+      border: 1px solid #000;
+      padding: 5px; }
+    #app .result dl dd {
+      width: 100px;
+      text-align: center;
+      border: 1px solid #000;
+      padding: 5px; }
 
 #app .wrap {
   width: 300px;
