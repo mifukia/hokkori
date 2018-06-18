@@ -26,16 +26,5 @@
         </form>
     </div>
 </body>
-<script>
-    const socket = io();
-    //loginイベント発行してsio.jsに渡す
-    $('.form-btn').on('click', () => {
-        const loginName = $('.form-control').val();
-        socket.emit('login', {
-            name: loginName
-        });
-    })
-
-</script>
 
 </html>
