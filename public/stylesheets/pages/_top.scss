@@ -107,7 +107,33 @@ body {
     background: #000;
     opacity: 0.6;
     z-index: 2;
-    display: none;
+    // display: none;
+}
+.count {
+    // animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-iteration-count: 6;
+    animation-fill-mode: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+    color: #fff;
+    visibility: hidden;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(20);
+    }
 }
 
 .username {

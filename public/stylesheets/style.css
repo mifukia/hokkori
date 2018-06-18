@@ -3963,8 +3963,29 @@ blockquote:before {
   height: 100%;
   background: #000;
   opacity: 0.6;
-  z-index: 2;
-  display: none; }
+  z-index: 2; }
+
+#app .count {
+  animation-duration: .5s;
+  animation-iteration-count: 6;
+  animation-fill-mode: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: #fff;
+  visibility: hidden; }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(1); }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: scale(20); } }
 
 #app .username {
   font-size: 13px;
@@ -4122,6 +4143,14 @@ blockquote:before {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+
+#login .formWrap {
+  height: 100vh;
+  background-image: url(../img/hokkori_hokkori.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #FFF5BD; }
 
 #login form {
   position: fixed;

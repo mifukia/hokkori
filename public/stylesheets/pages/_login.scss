@@ -1,5 +1,14 @@
 @charset "utf-8";
 
+.formWrap {
+    height: 100vh;
+    background-image: url(../img/hokkori_hokkori.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #FFF5BD;
+}
+
 form {
     position: fixed;
     top: 50%;
