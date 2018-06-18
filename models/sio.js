@@ -3,21 +3,13 @@ var dateformat = require('dateformat');
 var sendmail = require('sendmail')();
 var mysql = require('mysql');
 console.log(process.env.PORT)
-if(!process.env.PORT){
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'hosokai'
-    });
-}else{
-    var connection = mysql.createConnection({
-        host: '153.126.138.150',
-        user: 'hosokai',
-        password: '3kaku?4kaku!',
-        database: 'hosokaisan_db'
-    });
-}
+
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'hosokai'
+});
 // var connection = mysql.createConnection({
 //     host: '153.126.138.150',
 //     user: 'hosokai',
@@ -33,9 +25,10 @@ function sio(server) {
             connection.query('select * from score', function(err, rows, fields) {
                 if (err) { console.log('err: ' + err); } 
  
-                console.log('name: ' + rows[0].name);
-                console.log('id: ' + rows[0].id);
-                console.log('get: ' + rows[0].get);
+                // console.log('name: ' + rows[0].name);
+                // console.log('id: ' + rows[0].id);
+                // console.log('get: ' + rows[0].get);
+                console.log(rows)
             });
             socket.broadcast.emit('login', {
                 username: data.name,
