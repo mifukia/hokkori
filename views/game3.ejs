@@ -60,7 +60,7 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <a href="/game2">次のゲームへ進む</a>
+                <a href="/ending">次のゲームへ進む</a>
             </div>
         </div>
         <div class="overlay">
@@ -113,7 +113,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
-                    page:1,
+                    page:'thirdhit',
                 });
             }
             const action_miss = () => {
@@ -126,7 +126,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
-                    page:1,
+                    page:'thirdmiss',
                 });
             }
             if (judge()) {
