@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>テストページ001</title>
+    <title>テストページ004</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -18,34 +18,20 @@
     <div id="app">
         <a-scene>
             <a-assets>
-                <img id="last" crossorigin="anonymous" src="hdri_image/03-Ueno-Shrine_8k_3.jpg">
-                <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
-                <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
+                <img id="last" crossorigin="anonymous" src="hdri_image/Alexs_Apt_8k_0.jpg">
+                <img id="atari" crossorigin="anonymous" src="img/atari.png">
             </a-assets>
 
             <a-sky id="image-360" radius="10" src="#last"></a-sky>
 
-            <a-plane id="box01" class="box" position="7.363 0.931 5.88" rotation="6.99 -109.392 -4.090" scale="3 3 3" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--はずれ-->
-            <a-plane id="box02" class="box" position="-1 1 9.6" rotation="0 173.580 0" scale="1.7 1.7 1.7" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--はずれ-->
-            <a-plane id="box03" class="box" position="-9.588 -1.86 -0.402" rotation="-5.571 88.581 1.490" scale="2 2 2" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--はずれ-->
-            <a-plane id="box04" class="box" position="-8.438 -0.465 -5.087" rotation="-6.459 58.599 -1.542" scale="1 2 1" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--はずれ-->
-            <a-plane id="box05" class="box" position="-6.122 7.222 -1.670" rotation="50.481 73.8792 -7.750" scale="2 2 2" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--あたり-->
-            <a-plane id="box06" class="box" position="9.639 -0.075 -0.720" rotation="0 -90 0" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--あたり-->
-            <a-plane id="box07" class="box" position="-8.195 -4.967 2.329" rotation="-31.933 98.163 -1.313" color="#FFFFFF" material="opacity:0"></a-plane>
-            <!--あたり-->
+            <a-plane id="box01" position="-6.559 -4.951 -4.813" rotation="-33.387 36.836 42.278" scale="1.5 1.5 1" color="#FFFFFF"  material="opacity:0" ></a-plane>
 
             <a-camera>
-                <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
-                    <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
-                    <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
-                </a-entity>
-            </a-camera>
+              <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+                <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+          </a-camera>
         </a-scene>
         <div class="userData">
             <%= user %>
@@ -68,8 +54,8 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <!-- <a href="/game2">次のゲームへ進む</a> -->
-                <form method="post" action="/game2">
+                <!-- <a href="/ending">次のゲームへ進む</a> -->
+                <form method="post" action="/game1">
                     <div class="form-group02">
                         <input type="text" name="username" value="<%= user %>" class="form-control">
                     </div>
@@ -98,7 +84,7 @@
         //オブジェクトをクリックした時の処理
         $('.box').on('click', (e) => {
             const target = $(e.currentTarget).attr('id');
-            const judge = () => target === 'box05' || target === 'box06' || target === 'box07'
+            const judge = () => target === 'box01'
             const action_hit = () => {
                 $(e.currentTarget).attr({
                     'material': 'opacity:1',
@@ -127,7 +113,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
-                    page:'firsthit',
+                    page:1,
                 });
             }
             const action_miss = () => {
@@ -140,7 +126,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
-                    page:'firstmiss',
+                    page:1,
                 });
             }
             if (judge()) {
@@ -194,7 +180,7 @@
                     resolve(num-1);
                 },1000)
             })
-        };
+        }
         function func02(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -202,7 +188,7 @@
                     resolve(num-1);
                 },500)
             })
-        };
+        }
         function func03(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -210,7 +196,7 @@
                     resolve(num-1);
                 },500)
             })
-        };
+        }
         function func04(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -219,16 +205,15 @@
                     resolve(num-1);
                 },500)
             })
-        };
+        }
         function func05(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     $('.count').css('visibility','hidden')
                     $('.count').hide();
-                    $('.overlay').hide();
                 },500)
             })
-        };
+        }
 
         function gameStart() {
             $('.count').css('visibility','visible')
@@ -238,7 +223,13 @@
             .then(func03)
             .then(func04)
             .then(func05)
-        };
+        }
+        $('.overlay').on('click',()=> {
+            gameStart();
+        })
+        // socket.on('gameStart', (data) => {
+        //     gameStart();
+        // }
 
         //ログエリアへの出力
         socket.on('getMessageHit', (data) => {
@@ -251,11 +242,6 @@
 	            `);
             chatScroll();
         });
-
-        socket.on('gamestart', (data) => {
-            alert();
-            gameStart();
-        };
 
         //マスターからゲームセットを受けた時の処理
         socket.on('gameset', (data) => {
