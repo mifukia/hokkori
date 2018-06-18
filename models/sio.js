@@ -8,12 +8,19 @@ var connection = mysql.createConnection({
     password: '',
     database: 'hosokai'
 });
-
+connection.connect();
 function sio(server) {
     var io = require('socket.io')(server);
     //接続
     io.on('connection', (socket) => {
         socket.on('login', (data) => {
+            connection.query('select * from score', function(err, rows, fields) {
+                if (err) { console.log('err: ' + err); } 
+ 
+                console.log('name: ' + rows[0].name);
+                console.log('id: ' + rows[0].id);
+                console.log('get: ' + rows[0].get);
+            });
             socket.broadcast.emit('login', {
                 username: data.name,
                 firstget: 0,
@@ -33,13 +40,6 @@ function sio(server) {
             });
         })
         socket.on('getMessageHit', (data) => {
-            console.log(connection)
-            var test;
-            connection.query('select * from score', function(error, results, fields) {
-                if (error) throw error;
-
-                test = results[0]
-            });
             io.emit('getMessageHit', {
                 username: data.name,
                 getnum: data.getnum,
