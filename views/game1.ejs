@@ -68,7 +68,13 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <a href="/game2">次のゲームへ進む</a>
+                <!-- <a href="/game2">次のゲームへ進む</a> -->
+                <form method="post" action="/game2">
+                    <div class="form-group02">
+                        <input type="text" name="username" value="<%= user %>" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-lg">次のゲームへ</button>
+                </form>
             </div>
         </div>
         <div class="overlay">

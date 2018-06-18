@@ -59,7 +59,13 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <a href="/game2">次のゲームへ進む</a>
+                <!-- <a href="/game3">次のゲームへ進む</a> -->
+                <form method="post" action="/game3">
+                    <div class="form-group02">
+                        <input type="text" name="username" value="<%= user %>" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-lg">次のゲームへ</button>
+                </form>
             </div>
         </div>
         <div class="overlay">
@@ -69,7 +75,7 @@
     <script>
 
         const socket = io();
-        let current = "page01"
+        let current = "page02"
         let getHit = 0
         let getMiss = 0
 
@@ -133,43 +139,6 @@
             } else {
                 action_miss();
             }
-        });
-
-        //login
-
-        //sio.jsに通知
-        socket.on('connect', function() {
-                socket.emit('login', {
-                    name: '<%= user %>',
-                })
-            })
-            //sio.jsから受け取る
-        socket.on('login', (data) => {
-            console.log(data.name)
-            $('#messages').append(`
-                <li class="login">
-                    <p class="msg">${data.username}がゲームを開始しました。</p>
-                </li>
-            `);
-            chatScroll();
-        });
-
-        //logout
-
-        //sio.jsに通知
-        $(window).on('beforeunload', function() {
-            socket.emit('logout', {
-                name: '<%= user %>',
-            })
-        });
-        //sio.jsから受け取る
-        socket.on('logout', (data) => {
-            console.log(data.name)
-            $('#messages').append(`
-                <li class="logout">
-                    <p class="msg">${data.username}が退室しました。</p>
-                </li>
-            `);
         });
 
         function func01(num) {
