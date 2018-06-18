@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>テストページ002</title>
+    <title>テストページ004</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -18,25 +18,20 @@
     <div id="app">
         <a-scene>
             <a-assets>
-                <img id="last" crossorigin="anonymous" src="hdri_image/PaperMill_A_8k_1.jpg">
-                <img id="hit" crossorigin="anonymous" src="img/hokkori.png">
-                <img id="miss" crossorigin="anonymous" src="img/hikkori.png">
+                <img id="last" crossorigin="anonymous" src="hdri_image/Alexs_Apt_8k_0.jpg">
+                <img id="atari" crossorigin="anonymous" src="img/atari.png">
             </a-assets>
 
             <a-sky id="image-360" radius="10" src="#last"></a-sky>
 
-            <a-plane id="box01" position="0.849 8.690 -4.301" rotation="58.710 -2.896 -1.93" scale="2 2 1" color="#FFFFFF"  material="opacity:0" ></a-plane><!--あたり-->
-            <a-plane id="box02" position="-7.089 1.059 -6.592" rotation="3.016 52.670 -0.527" scale="2 2 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
-            <a-plane id="box03" position="6.327 0.83 7.532" rotation="0 -138.451 0" scale="1.5 1.5 1" color="#FFFFFF" material="opacity:0"></a-plane><!--はずれ-->
-            <a-plane id="box04" position="2.898 2.923 8.990" rotation="15.307 -168.613 1.795" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
-            <a-plane id="box05" position="-6.735 7.277 -0.476" rotation="46.967 90 -4.660" color="#FFFFFF" material="opacity:0"></a-plane><!--あたり-->
+            <a-plane id="box01" position="-6.559 -4.951 -4.813" rotation="-33.387 36.836 42.278" scale="1.5 1.5 1" color="#FFFFFF"  material="opacity:0" ></a-plane>
 
             <a-camera>
-                <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
-                  <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
-                  <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
-              </a-entity>
-            </a-camera>
+              <a-entity cursor="fuse: true;" position="0 0 -9" scale="0.3 0.3 0.3" geometry="primitive: ring" material="color: black; shader: flat">
+                <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="0.3 0.3 0.3"></a-animation>
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="0.3 0.3 0.3" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+          </a-camera>
         </a-scene>
         <div class="userData">
             <%= user %>
@@ -59,8 +54,8 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <!-- <a href="/game3">次のゲームへ進む</a> -->
-                <form method="post" action="/game3">
+                <!-- <a href="/ending">次のゲームへ進む</a> -->
+                <form method="post" action="/game1">
                     <div class="form-group02">
                         <input type="text" name="username" value="<%= user %>" class="form-control">
                     </div>
@@ -75,7 +70,7 @@
     <script>
 
         const socket = io();
-        let current = "page02"
+        let current = "page01"
         let getHit = 0
         let getMiss = 0
 
@@ -89,7 +84,7 @@
         //オブジェクトをクリックした時の処理
         $('.box').on('click', (e) => {
             const target = $(e.currentTarget).attr('id');
-            const judge = () => target === 'box01' || target === 'box04' || target === 'box05'
+            const judge = () => target === 'box01'
             const action_hit = () => {
                 $(e.currentTarget).attr({
                     'material': 'opacity:1',
@@ -118,7 +113,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
-                    page:'secondhit',
+                    page:1,
                 });
             }
             const action_miss = () => {
@@ -131,7 +126,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
-                    page:'secondmiss',
+                    page:1,
                 });
             }
             if (judge()) {
@@ -139,6 +134,43 @@
             } else {
                 action_miss();
             }
+        });
+
+        //login
+
+        //sio.jsに通知
+        socket.on('connect', function() {
+                socket.emit('login', {
+                    name: '<%= user %>',
+                })
+            })
+            //sio.jsから受け取る
+        socket.on('login', (data) => {
+            console.log(data.name)
+            $('#messages').append(`
+                <li class="login">
+                    <p class="msg">${data.username}がゲームを開始しました。</p>
+                </li>
+            `);
+            chatScroll();
+        });
+
+        //logout
+
+        //sio.jsに通知
+        $(window).on('beforeunload', function() {
+            socket.emit('logout', {
+                name: '<%= user %>',
+            })
+        });
+        //sio.jsから受け取る
+        socket.on('logout', (data) => {
+            console.log(data.name)
+            $('#messages').append(`
+                <li class="logout">
+                    <p class="msg">${data.username}が退室しました。</p>
+                </li>
+            `);
         });
 
         function func01(num) {

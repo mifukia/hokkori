@@ -68,7 +68,13 @@
         </div>
         <div class="gameset">
             <div class="gameset__link">
-                <a href="/game2">次のゲームへ進む</a>
+                <!-- <a href="/game2">次のゲームへ進む</a> -->
+                <form method="post" action="/game2">
+                    <div class="form-group02">
+                        <input type="text" name="username" value="<%= user %>" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-lg">次のゲームへ</button>
+                </form>
             </div>
         </div>
         <div class="overlay">
@@ -188,7 +194,7 @@
                     resolve(num-1);
                 },1000)
             })
-        }
+        };
         function func02(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -196,7 +202,7 @@
                     resolve(num-1);
                 },500)
             })
-        }
+        };
         function func03(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -204,7 +210,7 @@
                     resolve(num-1);
                 },500)
             })
-        }
+        };
         function func04(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -213,7 +219,7 @@
                     resolve(num-1);
                 },500)
             })
-        }
+        };
         function func05(num) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -222,7 +228,7 @@
                     $('.overlay').hide();
                 },500)
             })
-        }
+        };
 
         function gameStart() {
             $('.count').css('visibility','visible')
@@ -232,13 +238,7 @@
             .then(func03)
             .then(func04)
             .then(func05)
-        }
-        $('.overlay').on('click',()=> {
-            gameStart();
-        })
-        // socket.on('gameStart', (data) => {
-        //     gameStart();
-        // }
+        };
 
         //ログエリアへの出力
         socket.on('getMessageHit', (data) => {
@@ -251,6 +251,11 @@
 	            `);
             chatScroll();
         });
+
+        socket.on('gamestart', (data) => {
+            alert();
+            gameStart();
+        };
 
         //マスターからゲームセットを受けた時の処理
         socket.on('gameset', (data) => {

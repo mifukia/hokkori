@@ -25,6 +25,17 @@ form {
 .form-group{
     width: 300px;
 }
+.form-group02{
+    display: none;
+}
+.form-btn {
+    padding: 0;
+    background: none;
+    border: none;
+    img {
+        width: 55%;
+    }
+}
 form input {
     width: 100%;
 }

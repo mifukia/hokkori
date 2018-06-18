@@ -23,8 +23,8 @@ function sio(server) {
     io.on('connection', (socket) => {
         socket.on('login', (data) => {
             // connection.query('select * from score', function(err, rows, fields) {
-            //     if (err) { console.log('err: ' + err); } 
- 
+            //     if (err) { console.log('err: ' + err); }
+
             //     console.log('name: ' + rows[0].name);
             //     console.log('id: ' + rows[0].id);
             //     console.log('get: ' + rows[0].get);
@@ -62,6 +62,10 @@ function sio(server) {
                 getnum: data.getnum,
                 page: data.page
             });
+        });
+        socket.on('gamestart', (data) => {
+            console.log("aaaaa")
+            io.emit('gamestart')
         });
         socket.on('gameset', (data) => {
             io.emit('gameset')

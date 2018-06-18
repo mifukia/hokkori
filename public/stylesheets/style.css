@@ -4168,6 +4168,16 @@ blockquote:before {
 #login .form-group {
   width: 300px; }
 
+#login .form-group02 {
+  display: none; }
+
+#login .form-btn {
+  padding: 0;
+  background: none;
+  border: none; }
+  #login .form-btn img {
+    width: 55%; }
+
 #login form input {
   width: 100%; }
 
