@@ -53,13 +53,14 @@ function sio(server) {
             io.emit('getMessageHit', {
                 username: data.name,
                 getnum: data.getnum,
+                page: data.page
             });
-            // connection.query('INSERT INTO score (id, name, page, hit, miss, update_at, create_at) VALUES (NULL, '+data.name+', "1", '+data.getnum+', "0", "2018-06-15 00:00:00", "2018-06-15 00:00:00")');
         });
         socket.on('getMessageMiss', (data) => {
             io.emit('getMessageMiss', {
                 username: data.name,
                 getnum: data.getnum,
+                page: data.page
             });
         });
         socket.on('gameset', (data) => {

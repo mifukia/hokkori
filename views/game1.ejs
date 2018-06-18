@@ -118,6 +118,7 @@
                 socket.emit('getMessageHit', {
                     name: '<%= user %>',
                     getnum: getHit,
+                    page:1,
                 });
             }
             const action_miss = () => {
@@ -130,6 +131,7 @@
                 socket.emit('getMessageMiss', {
                     name: '<%= user %>',
                     getnum: getMiss,
+                    page:1,
                 });
             }
             if (judge()) {
