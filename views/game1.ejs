@@ -96,7 +96,7 @@
         }
 
         //オブジェクトをクリックした時の処理
-        $('.box').on('click', (e) => {
+        $('.box').one('click', (e) => {
             const target = $(e.currentTarget).attr('id');
             const judge = () => target === 'box05' || target === 'box06' || target === 'box07'
             const action_hit = () => {
