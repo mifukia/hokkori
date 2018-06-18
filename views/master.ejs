@@ -19,7 +19,7 @@
 <body>
     <div id="app">
         <div class="result">
-            {{usersData}}
+            {{usersData_uniq['hoge']}}
         </div>
         <div class="controller">
             <div class="controller__gameset" @click="gameset">
@@ -32,14 +32,38 @@
         const master = new Vue({
             el: '#app',
             data: {
-                usersData: [],
+                usersData: [
+                    {
+                        username: 'hoge',
+                        firstget: 0,
+                        firstmiss: 0,
+                        secondhit: 0,
+                        secondmiss: 0,
+                        thirdhit: 0,
+                        thirdmiss: 0,
+                        fourthhit: 0,
+                        fourthmiss: 0,
+                    },
+                    {
+                        username: 'fuga',
+                        firstget: 0,
+                        firstmiss: 0,
+                        secondhit: 0,
+                        secondmiss: 0,
+                        thirdhit: 0,
+                        thirdmiss: 0,
+                        fourthhit: 0,
+                        fourthmiss: 0,
+                    }
+                ],
             },
-            // watch: {
-            //     usersData: function() {
-            //         master.usersData_uniq = _.uniqBy(this.usersData, 'username');
-            //         console.log(this.usersData_uniq);
-            //     }
-            // },
+            computed: {
+                usersData_uniq : function(){
+                    return _.mapKeys(this.usersData, (chara) => {
+                        return chara.username;
+                    });
+                }
+            },
             created: function() {
                 socket.on('login', (data) => {
                     this.usersData.push(data)
@@ -49,6 +73,9 @@
                 gameset: function() {
                     //sio.jsに通知する
                     socket.emit('gameset');
+                },
+                gethit: function(){
+                    // for(var i = 0;)
                 }
             }
         });
