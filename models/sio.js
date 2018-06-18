@@ -1,35 +1,35 @@
 module.exports = sio;
 var dateformat = require('dateformat');
 var sendmail = require('sendmail')();
-var mysql = require('mysql');
-console.log(process.env.PORT)
+// var mysql = require('mysql');
+// console.log(process.env.PORT)
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'hosokai'
-});
+// var connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'hosokai'
+// });
 // var connection = mysql.createConnection({
 //     host: '153.126.138.150',
 //     user: 'hosokai',
 //     password: '3kaku?4kaku!',
 //     database: 'hosokaisan_db'
 // });
-connection.connect();
+// connection.connect();
 function sio(server) {
     var io = require('socket.io')(server);
     //接続
     io.on('connection', (socket) => {
         socket.on('login', (data) => {
-            connection.query('select * from score', function(err, rows, fields) {
-                if (err) { console.log('err: ' + err); } 
+            // connection.query('select * from score', function(err, rows, fields) {
+            //     if (err) { console.log('err: ' + err); } 
  
-                // console.log('name: ' + rows[0].name);
-                // console.log('id: ' + rows[0].id);
-                // console.log('get: ' + rows[0].get);
-                console.log(rows)
-            });
+            //     console.log('name: ' + rows[0].name);
+            //     console.log('id: ' + rows[0].id);
+            //     console.log('get: ' + rows[0].get);
+            //     console.log(rows)
+            // });
             socket.broadcast.emit('login', {
                 username: data.name,
                 firstget: 0,
