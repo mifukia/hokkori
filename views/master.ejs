@@ -40,19 +40,15 @@
             data: {
                 usersData: [],
             },
-            computed: {
-                usersData_uniq : function(){
-                    return _.mapKeys(this.usersData, (chara) => {
-                        return chara.username;
-                    });
-                }
-            },
             created: function() {
                 socket.on('login', (data) => {
                     this.usersData.push(data)
                 })
                 socket.on('getMessageHit', (data) => {
                     this.gethit(data.username,data.page,data.getnum);
+                })
+                socket.on('getMessageMiss', (data) => {
+                    this.getmiss(data.username,data.page,data.getnum);
                 })
             },
             methods: {
@@ -65,7 +61,13 @@
                     socket.emit('gameset');
                 },
                 gethit: function(name,page,num){
-                    console.log(name,page,num)
+                    _.each(this.usersData,function(n){
+                        if(n.username == name){
+                            n[page] = num;
+                        }
+                    })
+                },
+                getmiss: function(name,page,num){
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;
