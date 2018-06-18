@@ -2,12 +2,23 @@ module.exports = sio;
 var dateformat = require('dateformat');
 var sendmail = require('sendmail')();
 var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'hosokai'
-});
+console.log(process.env.PORT)
+if(!process.env.PORT){
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'hosokai'
+    });
+}else{
+    var connection = mysql.createConnection({
+        host: '153.126.138.150',
+        user: 'hosokai',
+        password: '3kaku?4kaku!',
+        database: 'hosokaisan_db'
+    });
+}
+
 connection.connect();
 function sio(server) {
     var io = require('socket.io')(server);
@@ -32,6 +43,7 @@ function sio(server) {
                 fourthhit: 0,
                 fourthmiss: 0,
             });
+
         });
         socket.on('logout', (data) => {
             socket.broadcast.emit('logout', {
