@@ -221,8 +221,7 @@ body {
 
 .result{
     margin: 50px auto 0;
-    width: 800px;
-    border: 1px solid #000;
+    width: 502px;
     dl{
         display: flex;
         margin: 0 auto 0;
@@ -283,8 +282,8 @@ body {
     text-align: center;
     p{
         position: fixed;
-        top:0;
-        left:0;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%,-50%);
         font-size: 16px;
         line-height: 1.5;
@@ -310,6 +309,17 @@ body {
     left: 0;
     right: 0;
     margin: auto;
+}
+
+.sercret {
+    cursor: pointer;
+    border: 2px solid #fff;
+    padding: 0.5em;
+    width: 150px;
+    margin: 10px auto 0;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(250, 250, 250)
 }
 
 .circle-infinit-1 {

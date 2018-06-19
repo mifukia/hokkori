@@ -4063,8 +4063,7 @@ blockquote:before {
 
 #app .result {
   margin: 50px auto 0;
-  width: 800px;
-  border: 1px solid #000; }
+  width: 502px; }
   #app .result dl {
     display: flex;
     margin: 0 auto 0; }
@@ -4118,8 +4117,8 @@ blockquote:before {
   text-align: center; }
   #app .ending p {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     font-size: 16px;
     line-height: 1.5;
@@ -4141,6 +4140,16 @@ blockquote:before {
   left: 0;
   right: 0;
   margin: auto; }
+
+#app .sercret {
+  cursor: pointer;
+  border: 2px solid #fff;
+  padding: 0.5em;
+  width: 150px;
+  margin: 10px auto 0;
+  text-align: center;
+  font-weight: bold;
+  color: #fafafa; }
 
 #app .circle-infinit-1 {
   animation: circle 3s linear 0s infinite normal none; }

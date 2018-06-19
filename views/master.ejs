@@ -26,6 +26,9 @@
                 ゲームを終了する
             </div>
         </div>
+        <div class="sercret" @click="sercret">
+            ここを押せ
+        </div>
         <div class="result">
             <dl>
                 <dt>
@@ -35,24 +38,18 @@
                     ほっこり①
                 </dd>
                 <dd>
-                    ひっこり①
-                </dd>
-                <dd>
                     ほっこり②
-                </dd>
-                <dd>
-                    ひっこり②
                 </dd>
                 <dd>
                     ほっこり③
                 </dd>
                 <dd>
-                    ひっこり③
-                </dd>
-                <dd>
                     TOTAL
                 </dd>
             </dl>
+            <br>
+            <br>
+            <br>
             <dl v-for="item in usersData_sort">
                 <dt>
                     {{item.username}}
@@ -61,22 +58,49 @@
                     {{item.firsthit}}
                 </dd>
                 <dd>
-                    {{item.firstmiss}}
-                </dd>
-                <dd>
                     {{item.secondhit}}
-                </dd>
-                <dd>
-                    {{item.secondmiss}}
                 </dd>
                 <dd>
                     {{item.thirdhit}}
                 </dd>
                 <dd>
+                    {{item.hittotal}}
+                </dd>
+            </dl>
+
+            <dl v-show="appear">
+                <dt>
+                    名前
+                </dt>
+                <dd>
+                    ひっこり①
+                </dd>
+                <dd>
+                    ひっこり②
+                </dd>
+                <dd>
+                    ひっこり③
+                </dd>
+                <dd>
+                    TOTAL
+                </dd>
+            </dl>
+            <!-- ひっこり用リスト -->
+            <dl v-for="item in usersData_sort" v-show="appear">
+                <dt>
+                    {{item.username}}
+                </dt>
+                <dd>
+                    {{item.firstmiss}}
+                </dd>
+                <dd>
+                    {{item.secondmiss}}
+                </dd>
+                <dd>
                     {{item.thirdmiss}}
                 </dd>
                 <dd>
-                    {{item.total}}
+                    {{item.misstotal}}
                 </dd>
             </dl>
         </div>
@@ -87,10 +111,12 @@
             el: '#app',
             data: {
                 usersData: [],
+                appear: false
             },
             computed: {
                 usersData_sort:function(){
-                    return _.orderBy(this.usersData, 'total', 'desc');
+                    return _.orderBy(this.usersData, 'hittotal', 'desc');
+                    return _.orderBy(this.usersData, 'misstotal', 'desc');
                 }
             },
             created: function() {
@@ -117,7 +143,7 @@
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;
-                            n.total = n.total+1;
+                            n.hittotal = n.hittotal+1;
                         }
                     })
                 },
@@ -125,9 +151,12 @@
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;
-                            n.total = n.total+1;
+                            n.misstotal = n.misstotal+1;
                         }
                     })
+                },
+                sercret: function() {
+                    this.appear = true
                 }
             }
         });
