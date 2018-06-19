@@ -45,7 +45,7 @@
                     TOTAL
                 </dd>
             </dl>
-            <dl v-for="item in usersData">
+            <dl v-for="item in usersData_sort">
                 <dt>
                     {{item.username}}
                 </dt>
@@ -68,7 +68,7 @@
                     {{item.thirdmiss}}
                 </dd>
                 <dd>
-                    {{item.firsthit + item.firstmiss + item.secondhit + item.secondmiss + item.thirdhit + item.thirdmiss}}
+                    {{item.total}}
                 </dd>
             </dl>
         </div>
@@ -87,6 +87,11 @@
             el: '#app',
             data: {
                 usersData: [],
+            },
+            computed: {
+                usersData_sort:function(){
+                    return _.orderBy(this.usersData, 'total', 'desc');
+                }
             },
             created: function() {
                 socket.on('login', (data) => {
@@ -112,6 +117,7 @@
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;
+                            n.total = n.total+1;
                         }
                     })
                 },
@@ -119,6 +125,7 @@
                     _.each(this.usersData,function(n){
                         if(n.username == name){
                             n[page] = num;
+                            n.total = n.total+1;
                         }
                     })
                 }

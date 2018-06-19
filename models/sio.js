@@ -41,6 +41,7 @@ function sio(server) {
                 thirdmiss: 0,
                 fourthhit: 0,
                 fourthmiss: 0,
+                total:0,
             });
 
         });
