@@ -11,7 +11,7 @@
 
 form {
     position: fixed;
-    top: 50%;
+    top: 48%;
     left:50%;
     transform: translate(-50%,-50%);
     width: 100%;
@@ -21,19 +21,21 @@ form {
     @include sp{
         width: 95%;
     };
+    h1{
+        width: 80%;
+        margin-bottom: 5%;
+    }
 }
 .form-group{
     width: 300px;
 }
-.form-group02{
-    display: none;
-}
+
 .form-btn {
     padding: 0;
     background: none;
     border: none;
     img {
-        width: 55%;
+        width: 60%;
     }
 }
 form input {

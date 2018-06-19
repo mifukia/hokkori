@@ -22,15 +22,6 @@ function sio(server) {
     //接続
     io.on('connection', (socket) => {
         socket.on('login', (data) => {
-            console.log(data);
-            // connection.query('select * from score', function(err, rows, fields) {
-            //     if (err) { console.log('err: ' + err); }
-
-            //     console.log('name: ' + rows[0].name);
-            //     console.log('id: ' + rows[0].id);
-            //     console.log('get: ' + rows[0].get);
-            //     console.log(rows)
-            // });
             socket.broadcast.emit('login', {
                 username: data.name,
                 firsthit: 0,

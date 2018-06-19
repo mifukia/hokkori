@@ -63,6 +63,9 @@
                 </form>
             </div>
         </div>
+        <div class="wait">
+                待機中…
+            </div>
         <div class="overlay">
             <div class="count"></div>
         </div>
@@ -209,7 +212,7 @@
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     $('.count').css('visibility','hidden')
-                    $('.overlay').hide();
+                    $('.overlay,.wait').hide();
                 },500)
             })
         }
