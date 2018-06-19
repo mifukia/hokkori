@@ -135,11 +135,11 @@ body {
     animation-iteration-count: 6;
     animation-fill-mode: none;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     font-size: 30px;
-    color: #fff;
+    color: #000;
     visibility: hidden;
 }
 @keyframes fadeIn {
@@ -276,6 +276,21 @@ body {
 .form-group02{
     display: none;
 }
+.ending{
+    background: #FFF5BD;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: bold;
+    }
+}
+
 .circle-basic {
     width: 30px;
     height: 30px;
@@ -338,3 +353,4 @@ body {
         transform: rotate(360deg);
     }
 }
+

@@ -10,6 +10,7 @@ var game1Router = require('./routes/game1');
 var game2Router = require('./routes/game2');
 var game3Router = require('./routes/game3');
 var game4Router = require('./routes/game4');
+var endingRouter = require('./routes/ending');
 var masterRouter = require('./routes/master');
 
 
@@ -37,6 +38,7 @@ app.use('/game1', game1Router);
 app.use('/game2', game2Router);
 app.use('/game3', game3Router);
 app.use('/game4', game4Router);
+app.use('/ending', endingRouter);
 app.use('/master', masterRouter);
 
 
