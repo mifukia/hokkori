@@ -276,18 +276,20 @@ body {
 .form-group02{
     display: none;
 }
-.ending{
+.endingBody{
     background: #FFF5BD;
+}
+.ending{
     text-align: center;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     p{
+        position: fixed;
+        top:0;
+        left:0;
+        transform: translate(-50%,-50%);
         font-size: 16px;
         line-height: 1.5;
         font-weight: bold;
+        
     }
 }
 
