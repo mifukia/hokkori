@@ -4164,7 +4164,7 @@ blockquote:before {
   background-image: url(../img/hokkori_hokkori.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-color: #FFF5BD; }
 
 #login form {

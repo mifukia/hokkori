@@ -109,15 +109,12 @@
                         break;
                     case 3:
                         $('.getArea__gif img').attr('src', "/img/hokkorihan_3.gif");
+                        setTimeout(() => {
+                            $('.getArea__gif img').attr('src', "");
+                        }, 3000)
                         break;
                 }
                 $('.getArea__count span').text(getHit);
-                //sio.jsに通知する
-                socket.emit('getMessageHit', {
-                    name: '<%= user %>',
-                    getnum: getHit,
-                    page:'fourthhit',
-                });
             }
             const action_miss = () => {
                 $(e.currentTarget).attr({
@@ -125,12 +122,6 @@
                     'src': '#miss'
                 })
                 getMiss++
-                //sio.jsに通知する
-                socket.emit('getMessageMiss', {
-                    name: '<%= user %>',
-                    getnum: getMiss,
-                    page:1,
-                });
             }
             if (judge()) {
                 action_hit();

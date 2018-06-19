@@ -123,6 +123,9 @@
                         break;
                     case 3:
                         $('.getArea__gif img').attr('src', "/img/hokkorihan_3.gif");
+                        setTimeout(() => {
+                            $('.getArea__gif img').attr('src', "");
+                        }, 3000)
                         break;
                 }
                 $('.getArea__count span').text(getHit);
