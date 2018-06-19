@@ -87,7 +87,7 @@
         //オブジェクトをクリックした時の処理
         $('.box').one('click', (e) => {
             const target = $(e.currentTarget).attr('id');
-            const judge = () => target === 'box03' || target === 'box05' || target === 'box6'
+            const judge = () => target === 'box03' || target === 'box05' || target === 'box06'
             const action_hit = () => {
                 $(e.currentTarget).attr({
                     'material': 'opacity:1',
