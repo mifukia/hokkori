@@ -4077,6 +4077,8 @@ blockquote:before {
       text-align: center;
       border: 1px solid #000;
       padding: 5px; }
+  #app .result .hikkori_list {
+    margin-top: 50px; }
 
 #app .wrap {
   width: 300px;
